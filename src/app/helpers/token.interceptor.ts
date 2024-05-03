@@ -1,7 +1,7 @@
-import { AuthenticationService } from './../services/authentication.service';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthenticationService } from './../services/authentication.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -15,6 +15,12 @@ export class TokenInterceptor implements HttpInterceptor {
       });
       return next.handle(newRequest);
     }
-    return next.handle(request);
+
+    let newRequest = request.clone({
+      setHeaders: {
+        'Access-Control-Allow-Credentials': 'true',
+      },
+    });
+    return next.handle(newRequest);
   }
 }
