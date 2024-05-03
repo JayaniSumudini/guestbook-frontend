@@ -1,6 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationClient } from '../clients/authentication.client';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,13 +9,23 @@ import { AuthenticationClient } from '../clients/authentication.client';
 export class AuthenticationService {
   private tokenKey = 'token';
 
-  constructor(private authenticationClient: AuthenticationClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   public register(username: string, email: string, password: string): void {
-    this.authenticationClient.register(username, email, password).subscribe((accessToken) => {
-      localStorage.setItem(this.tokenKey, accessToken);
-      this.router.navigate(['/']);
-    });
+    this.http
+      .post(
+        environment.apiUrl + '/users',
+        {
+          name: username,
+          email: email,
+          password: password,
+        },
+        { responseType: 'text' }
+      )
+      .subscribe((accessToken) => {
+        localStorage.setItem(this.tokenKey, accessToken);
+        this.router.navigate(['/']);
+      });
   }
 
   public isLoggedIn(): boolean {
@@ -27,14 +38,23 @@ export class AuthenticationService {
     this.router.navigate(['/login']);
   }
 
-  public getToken(): string| null {
+  public getToken(): string | null {
     return this.isLoggedIn() ? localStorage.getItem(this.tokenKey) : null;
   }
 
   public login(email: string, password: string): void {
-    this.authenticationClient.login(email, password).subscribe((accessToken) => {
-      localStorage.setItem(this.tokenKey, accessToken);
-      this.router.navigate(['/']);
-    });
+    this.http
+      .post(
+        environment.apiUrl + '/auth/login',
+        {
+          email: email,
+          password: password,
+        },
+        { responseType: 'text' }
+      )
+      .subscribe((accessToken) => {
+        localStorage.setItem(this.tokenKey, accessToken);
+        this.router.navigate(['/']);
+      });
   }
 }

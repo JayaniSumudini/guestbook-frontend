@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './helpers/auth.guard';
-import { SecretComponent } from './secret/secret.component';
+import { HomePageComponent } from './home-page/home-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
-
+import { SecretComponent } from './secret/secret.component';
 const routes: Routes = [
   {
     path: '',
@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterPageComponent,
+  },
+  {
+    path: 'home',
+    component: HomePageComponent,
   },
 ];
 
