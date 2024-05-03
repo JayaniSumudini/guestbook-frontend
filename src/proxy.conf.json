@@ -1,0 +1,13 @@
+{
+  "/api/*": {
+    "target": "http://localhost:3000",
+    "secure": false,
+    "logLevel": "debug"
+  },
+
+  "/dev/api/*": {
+    "target": "https://cc9vqgsdzd.execute-api.ap-southeast-1.amazonaws.com",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}
