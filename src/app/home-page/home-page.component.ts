@@ -11,8 +11,7 @@ export class HomePageComponent implements OnInit {
   public commentForm!: FormGroup;
   public allComments: any = [];
 
-  displayedColumns = ['content', 'userType', 'createdAt'];
-  dataSource = this.allComments;
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
 
   constructor(private commentService: CommentService) {}
 
@@ -32,7 +31,6 @@ export class HomePageComponent implements OnInit {
         this.commentService.getAllComments().subscribe((comments) => {
           this.allComments = comments;
         });
-        console.log(this.allComments);
       },
       error: (err) => {
         console.log(err);
