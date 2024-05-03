@@ -17,9 +17,19 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { SecretComponent } from './secret/secret.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { Component } from '@angular/core';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, SecretComponent, RegisterPageComponent, LoginPageComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    SecretComponent,
+    RegisterPageComponent,
+    LoginPageComponent,
+    HomePageComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -34,6 +44,7 @@ import { SecretComponent } from './secret/secret.component';
     MatIconModule,
     MatInputModule,
     MatCheckboxModule,
+    MatTableModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent],
