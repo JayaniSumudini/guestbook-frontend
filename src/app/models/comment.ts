@@ -3,10 +3,15 @@ import { UserType } from './user';
 export interface Comment {
   id: string;
   content: string;
-  userType: UserType;
+  user: CommentUserDetails;
   createdAt: Date;
-  userId?: string;
   updatedAt?: Date;
   deletedAt?: Date;
   isDeleted?: boolean;
 }
+
+export type CommentUserDetails = {
+  userType: UserType;
+  id?: string;
+  name?: string;
+};

@@ -27,6 +27,7 @@
     {{ element.content }}
   </mat-card-content>
   <mat-card-footer align="end" class="comment-footer">
-    {{ element.updatedAt | date : 'yyyy-MM-dd' }} by {{ element.userType }}
+    {{ element.updatedAt | date : 'yyyy-MM-dd' }} by
+    {{ element.user.userType === 'user' ? element.user.name : element.user.userType }}
   </mat-card-footer>
 </mat-card>

@@ -1,9 +1,7 @@
-<p>
-  <mat-toolbar>
-    <span>GUEST BOOK</span>
-    <div>
-      <button type="button" routerLink="/login" *ngIf="!shouldHideLoginButton" mat-flat-button>Login</button>
-      <button type="button" routerLink="/register" *ngIf="!shouldHideLoginButton" mat-flat-button>Signup</button>
-    </div>
-  </mat-toolbar>
-</p>
+<mat-toolbar color="primary">
+  <span class="title"><span routerLink="/">GUEST BOOK</span></span>
+  <div class="actions">
+    <button type="button" routerLink="/login" *ngIf="!shouldHideLoginButton" mat-raised-button>Login</button>
+    <button type="button" routerLink="/register" *ngIf="!shouldHideLoginButton" mat-raised-button>Signup</button>
+  </div>
+</mat-toolbar>
