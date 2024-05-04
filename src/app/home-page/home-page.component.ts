@@ -19,7 +19,7 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.commentForm = new FormGroup({
-      comment: new FormControl('', [Validators.required]),
+      comment: new FormControl('', [Validators.required, Validators.minLength(5)]),
     });
     this.commentService.getAllComments().subscribe((response: getAllCommentsResponse) => {
       this.allComments = response.comments;
@@ -27,21 +27,16 @@ export class HomePageComponent implements OnInit {
   }
 
   public onSubmit() {
-    console.log(this.commentForm.get('comment')!.value);
-    this.commentService.saveComment(this.commentForm.get('comment')!.value).subscribe({
-      next: (response: saveCommentResponse) => {
-        this.commentService.getAllComments().subscribe({
-          next: (response: getAllCommentsResponse) => {
-            this.allComments = response.comments;
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        });
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    const newComment = this.commentForm.get('comment')!.value;
+    if (newComment) {
+      this.commentService.saveComment(newComment).subscribe({
+        next: (response: saveCommentResponse) => {
+          this.ngOnInit();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
   }
 }
