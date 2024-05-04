@@ -7,3 +7,7 @@ export interface getAllCommentsResponse {
 export interface saveCommentResponse {
   commentId: string;
 }
+
+export interface registerUserResponse {
+  accessToken: string;
+}
