@@ -20,7 +20,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   public onSubmit() {
-    console.log('here');
     this.authenticationService.login(this.loginForm.get('email')!.value, this.loginForm!.get('password')!.value);
   }
 }

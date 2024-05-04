@@ -4,12 +4,11 @@ import { AuthGuard } from './helpers/auth.guard';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
-import { SecretComponent } from './secret/secret.component';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 const routes: Routes = [
   {
     path: '',
-    component: SecretComponent,
-    canActivate: [AuthGuard],
+    component: HomePageComponent,
   },
   {
     path: 'login',
@@ -22,6 +21,11 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomePageComponent,
+  },
+  {
+    path: 'dashboard',
+    component: UserDashboardComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

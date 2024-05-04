@@ -3,5 +3,6 @@
   <div class="actions">
     <button type="button" routerLink="/login" *ngIf="!shouldHideLoginButton" mat-raised-button>Login</button>
     <button type="button" routerLink="/register" *ngIf="!shouldHideLoginButton" mat-raised-button>Signup</button>
+    <button (click)="logout()" *ngIf="shouldHideLoginButton" mat-raised-button>Logout</button>
   </div>
 </mat-toolbar>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
@@ -7,7 +8,22 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  public shouldHideLoginButton = false;
+  private tokenSubscription: Subscription | undefined;
+
   constructor(private authenticationService: AuthenticationService) {}
-  shouldHideLoginButton = this.authenticationService.isLoggedIn();
-  ngOnInit(): void {}
+
+  ngOnInit(): void {
+    this.tokenSubscription = this.authenticationService.getTokenObservable().subscribe((isLogin) => {
+      this.shouldHideLoginButton = isLogin;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.tokenSubscription?.unsubscribe();
+  }
+
+  public logout() {
+    this.authenticationService.logout();
+  }
 }
