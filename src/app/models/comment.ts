@@ -1,7 +1,7 @@
 import { UserType } from './user';
 
 export interface Comment {
-  id: string;
+  _id: string;
   content: string;
   user: CommentUserDetails;
   createdAt: Date;

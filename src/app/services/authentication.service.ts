@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { loginResponse } from '../models/response';
+import { authIdentityResponse, loginResponse } from '../models/response';
 
 @Injectable({
   providedIn: 'root',
@@ -75,6 +75,10 @@ export class AuthenticationService {
           this.router.navigate(['/dashboard']);
         }
       });
+  }
+
+  public getAuthIdentity(): Observable<authIdentityResponse> {
+    return this.http.get<authIdentityResponse>(environment.apiUrl + '/auth/identity');
   }
 
   public getTokenObservable(): Observable<boolean> {

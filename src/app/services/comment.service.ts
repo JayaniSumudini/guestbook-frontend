@@ -20,4 +20,8 @@ export class CommentService {
   public getAllComments(): Observable<getAllCommentsResponse> {
     return this.http.get<getAllCommentsResponse>(environment.apiUrl + '/comments');
   }
+
+  public deleteCommentById(commentId: string) {
+    return this.http.delete(environment.apiUrl + '/comments/' + commentId);
+  }
 }

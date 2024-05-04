@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Comment } from '../models/comment';
-import { getAllCommentsResponse, saveCommentResponse } from '../models/response';
+import { authIdentityResponse, getAllCommentsResponse, saveCommentResponse } from '../models/response';
+import { AuthenticationService } from '../services/authentication.service';
 import { CommentService } from '../services/comment.service';
 
 @Component({
@@ -12,10 +13,9 @@ import { CommentService } from '../services/comment.service';
 export class UserDashboardComponent implements OnInit {
   public commentForm!: FormGroup;
   public allComments: Comment[] = [];
+  public userId!: string;
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-
-  constructor(private commentService: CommentService) {}
+  constructor(private commentService: CommentService, private authenticationService: AuthenticationService) {}
 
   ngOnInit(): void {
     this.commentForm = new FormGroup({
@@ -23,6 +23,10 @@ export class UserDashboardComponent implements OnInit {
     });
     this.commentService.getAllComments().subscribe((response: getAllCommentsResponse) => {
       this.allComments = response.comments;
+    });
+    this.authenticationService.getAuthIdentity().subscribe((response: authIdentityResponse) => {
+      console.log(response.user._id);
+      this.userId = response.user._id;
     });
   }
 
@@ -39,4 +43,15 @@ export class UserDashboardComponent implements OnInit {
       });
     }
   }
+  public delete(commentId: string) {
+    this.commentService.deleteCommentById(commentId).subscribe({
+      next: (response) => {
+        this.ngOnInit();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+  // public edit() {}
 }
