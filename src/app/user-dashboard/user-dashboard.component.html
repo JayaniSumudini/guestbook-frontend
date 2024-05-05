@@ -34,18 +34,18 @@
       *ngIf="element.user.id === userId"
       mat-raised-button
       color="warn"
-      (click)="openDialog(element._id)"
+      (click)="openDeleteDialog(element._id)"
     >
       Delete
     </button>
-    <!-- <button
+    <button
       type="button"
       *ngIf="element.user.id === userId"
       mat-raised-button
-      color="accent"
-      routerLink="/edit-comment"
+      color="warn"
+      (click)="openEditDialog(element._id, element.content)"
     >
       Edit
-    </button> -->
+    </button>
   </mat-card-footer>
 </mat-card>

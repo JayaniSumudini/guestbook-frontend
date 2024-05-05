@@ -1,0 +1,15 @@
+<div>
+  <h1 mat-dialog-title>Edit Comment</h1>
+  <form [formGroup]="commentForm" class="comment-form">
+    <div mat-dialog-content>
+      <mat-form-field class="comment-full-width" appearance="fill">
+        <mat-label>Would you like to edit below comment?</mat-label>
+        <textarea matInput #message maxlength="256" formControlName="comment"></textarea>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions align="end">
+      <button mat-button [mat-dialog-close]="false">Close</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Apply Changes</button>
+    </div>
+  </form>
+</div>

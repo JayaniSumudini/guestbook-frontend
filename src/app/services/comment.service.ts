@@ -24,4 +24,10 @@ export class CommentService {
   public deleteCommentById(commentId: string) {
     return this.http.delete(environment.apiUrl + '/comments/' + commentId);
   }
+
+  public updateCommentById(commentId: string, comment: string) {
+    return this.http.put(environment.apiUrl + '/comments/' + commentId, {
+      content: comment,
+    });
+  }
 }

@@ -7,6 +7,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { CommentService } from '../services/comment.service';
 
 import { MatDialog } from '@angular/material/dialog';
+import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -50,7 +51,7 @@ export class UserDashboardComponent implements OnInit {
       });
     }
   }
-  public delete(commentId: string) {
+  private deleteComment(commentId: string) {
     this.commentService.deleteCommentById(commentId).subscribe({
       next: (response) => {
         this.ngOnInit();
@@ -60,13 +61,8 @@ export class UserDashboardComponent implements OnInit {
       },
     });
   }
-  // public edit() {}
 
-  finalCallback(message: string) {
-    console.log('Callback completed for message: ' + message);
-  }
-
-  openDialog(commentId: string): void {
+  openDeleteDialog(commentId: string): void {
     let dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '250px',
       data: {
@@ -76,7 +72,33 @@ export class UserDashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
       if (result) {
-        this.delete(commentId);
+        this.deleteComment(commentId);
+      }
+    });
+  }
+
+  private updateComment(commentId: string, comment: string): void {
+    this.commentService.updateCommentById(commentId, comment).subscribe({
+      next: (response) => {
+        this.ngOnInit();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  openEditDialog(commentId: string, comment: string): void {
+    let dialogRef = this.dialog.open(EditDialogComponent, {
+      width: '650px',
+      // height: '300px',
+      data: {
+        content: comment,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.updateComment(commentId, result);
       }
     });
   }

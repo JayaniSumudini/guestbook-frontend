@@ -21,6 +21,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
     HomePageComponent,
     UserDashboardComponent,
     DeleteDialogComponent,
+    EditDialogComponent,
   ],
   imports: [
     BrowserModule,
