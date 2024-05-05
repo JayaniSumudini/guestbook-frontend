@@ -34,7 +34,7 @@
       *ngIf="element.user.id === userId"
       mat-raised-button
       color="warn"
-      (click)="delete(element._id)"
+      (click)="openDialog(element._id)"
     >
       Delete
     </button>

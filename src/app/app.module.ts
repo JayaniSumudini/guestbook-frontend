@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -13,6 +14,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { TokenInterceptor } from './helpers/token.interceptor';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -28,6 +30,7 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
     LoginPageComponent,
     HomePageComponent,
     UserDashboardComponent,
+    DeleteDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,7 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
     MatInputModule,
     MatCheckboxModule,
     MatTableModule,
+    MatDialogModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent],
