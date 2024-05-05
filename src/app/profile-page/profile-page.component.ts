@@ -14,6 +14,7 @@ import { UserService } from '../services/user.service';
 })
 export class ProfilePageComponent implements OnInit {
   public profileForm!: FormGroup;
+  public changePasswordForm!: FormGroup;
   public user!: User;
 
   constructor(
@@ -31,11 +32,25 @@ export class ProfilePageComponent implements OnInit {
     this.profileForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(25)]),
     });
+
+    this.changePasswordForm = new FormGroup({
+      oldPassword: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      newPassword: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    });
   }
 
   public changeUsername() {
     console.log(this.profileForm.get('username')!.value);
     this.userService.updateUserName(this.profileForm.get('username')!.value);
+  }
+
+  public changePassword() {
+    this.authenticationService
+      .changePassword(
+        this.changePasswordForm.get('oldPassword')!.value,
+        this.changePasswordForm.get('newPassword')!.value
+      )
+      .subscribe();
   }
 
   openDeleteDialog(): void {

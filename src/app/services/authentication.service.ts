@@ -84,4 +84,11 @@ export class AuthenticationService {
   public getTokenObservable(): Observable<boolean> {
     return this.tokenSubject.asObservable();
   }
+
+  public changePassword(oldPassword: string, newPassword: string) {
+    return this.http.put(environment.apiUrl + '/auth/changePassword', {
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+    });
+  }
 }
