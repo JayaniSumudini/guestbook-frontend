@@ -4,5 +4,13 @@
     <button type="button" routerLink="/login" *ngIf="!shouldHideLoginButton" mat-raised-button>Login</button>
     <button type="button" routerLink="/register" *ngIf="!shouldHideLoginButton" mat-raised-button>Signup</button>
     <button (click)="logout()" *ngIf="shouldHideLoginButton" mat-raised-button>Logout</button>
+    <div *ngIf="shouldHideLoginButton">
+      <button mat-icon-button routerLink="/dashboard">
+        <mat-icon>home</mat-icon>
+      </button>
+      <app-menubar></app-menubar>
+    </div>
+
+    <!-- </button> -->
   </div>
 </mat-toolbar>

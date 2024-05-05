@@ -8,6 +8,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,13 +16,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { TokenInterceptor } from './helpers/token.interceptor';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { MenubarComponent } from './menubar/menubar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
-import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,8 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
     UserDashboardComponent,
     DeleteDialogComponent,
     EditDialogComponent,
+    MenubarComponent,
+    ProfilePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +55,7 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
     MatCheckboxModule,
     MatTableModule,
     MatDialogModule,
+    MatMenuModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent],

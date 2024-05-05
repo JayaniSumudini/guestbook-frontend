@@ -66,7 +66,7 @@ export class UserDashboardComponent implements OnInit {
     let dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '250px',
       data: {
-        commentId,
+        text: 'comment',
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
