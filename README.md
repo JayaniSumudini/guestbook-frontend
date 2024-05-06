@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.13.
 
+use below admin account to test admin features
+email: admin@gmail.com
+password: Pass@123
+
 ## Development server
 
 Change your environments/environment.ts file with apiUrl.
