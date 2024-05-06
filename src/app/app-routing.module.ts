@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ForgotPasswordPageComponent } from './forgot-password-page/forgot-password-page.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { ResetPasswordPageComponent } from './reset-password-page/reset-password-page.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 const routes: Routes = [
   {
@@ -32,6 +34,11 @@ const routes: Routes = [
     path: 'profile',
     component: ProfilePageComponent,
   },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordPageComponent,
+  },
+  { path: 'resetpassword', component: ResetPasswordPageComponent },
 ];
 
 @NgModule({

@@ -16,3 +16,7 @@ export interface loginResponse {
 export interface authIdentityResponse {
   user: User;
 }
+
+export interface forgotPasswordResponse {
+  resetPasswordToken: string;
+}

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { authIdentityResponse, loginResponse } from '../models/response';
+import { authIdentityResponse, forgotPasswordResponse, loginResponse } from '../models/response';
 
 @Injectable({
   providedIn: 'root',
@@ -89,6 +89,19 @@ export class AuthenticationService {
     return this.http.put(environment.apiUrl + '/auth/changePassword', {
       oldPassword: oldPassword,
       newPassword: newPassword,
+    });
+  }
+
+  public forgotPassword(email: string) {
+    return this.http.post<forgotPasswordResponse>(environment.apiUrl + '/auth/forgotPassword', {
+      email,
+    });
+  }
+
+  public resetPassword(resetPasswordToken: string, newPassword: string) {
+    return this.http.put<forgotPasswordResponse>(environment.apiUrl + '/auth/resetPassword', {
+      resetPasswordToken,
+      newPassword,
     });
   }
 }
