@@ -9,8 +9,6 @@ import { UserType } from '../models/user';
 @Injectable({
   providedIn: 'root',
 })
-
-//TODO: handle errors
 export class AuthenticationService {
   private tokenKey = 'token';
   private expirationKey = 'expiration';
@@ -86,7 +84,7 @@ export class AuthenticationService {
 
   public logout(): void {
     this.clearToken();
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
   }
 
   //TODO: handle incorrect password

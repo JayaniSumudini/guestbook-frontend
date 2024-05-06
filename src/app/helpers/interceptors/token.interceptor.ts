@@ -17,7 +17,7 @@ export class TokenInterceptor implements HttpInterceptor {
       newRequest = newRequest.clone({
         setHeaders: {
           Authorization: `Bearer ${this.authenticationService.getToken()}`,
-          'Access-Control-Allow-Credentials': 'true', // Keep this header for logged-in users
+          'Access-Control-Allow-Credentials': 'true',
         },
       });
     }

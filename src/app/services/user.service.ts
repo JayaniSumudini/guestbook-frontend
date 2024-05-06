@@ -14,8 +14,7 @@ export class UserService {
     return this.http
       .put(environment.apiUrl + '/users/', {
         username,
-      })
-      .subscribe();
+      });
   }
 
   deleteProfile() {

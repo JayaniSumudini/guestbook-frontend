@@ -24,7 +24,7 @@ const routes: Routes = [
     component: RegisterPageComponent,
   },
   {
-    path: 'home',
+    path: '',
     component: HomePageComponent,
   },
   {

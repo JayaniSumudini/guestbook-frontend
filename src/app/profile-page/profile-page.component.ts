@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { authIdentityResponse } from '../models/response';
 import { User } from '../models/user';
@@ -20,7 +21,8 @@ export class ProfilePageComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private userService: UserService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +41,14 @@ export class ProfilePageComponent implements OnInit {
   }
 
   public changeUsername() {
-    this.userService.updateUserName(this.profileForm.get('username')!.value);
+    this.userService.updateUserName(this.profileForm.get('username')!.value).subscribe({
+      next: (response: any) => {
+        this.snackBar.open('Your username updated successfully!!!', 'close');
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
   }
 
   public changePassword() {
@@ -48,7 +57,14 @@ export class ProfilePageComponent implements OnInit {
         this.changePasswordForm.get('oldPassword')!.value,
         this.changePasswordForm.get('newPassword')!.value
       )
-      .subscribe();
+      .subscribe({
+        next: (response: any) => {
+          this.snackBar.open('Your password updated successfully!!!', 'close');
+        },
+        error: (err: any) => {
+          console.log(err);
+        },
+      });
   }
 
   openDeleteDialog(): void {
@@ -69,6 +85,7 @@ export class ProfilePageComponent implements OnInit {
     this.userService.deleteProfile().subscribe({
       next: (response: any) => {
         this.authenticationService.logout();
+        this.snackBar.open('Your profile deleted successfully!!!', 'close');
       },
       error: (err: any) => {
         console.log(err);
