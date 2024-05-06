@@ -1,0 +1,23 @@
+.comment-form {
+  min-width: 150px;
+  max-width: 600px;
+  width: 100%;
+  margin: 50px auto;
+}
+
+.comment-full-width {
+  width: 100%;
+}
+
+.comment {
+  margin-bottom: 12px;
+}
+
+.comment-footer {
+  font-size: 12px;
+  padding: 8px;
+  gap: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}

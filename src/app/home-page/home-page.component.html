@@ -1,0 +1,33 @@
+<form [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="comment-form">
+  <mat-card>
+    <mat-card-title>Leave a Comment</mat-card-title>
+    <mat-card-subtitle> You can leave a comment as a guest or login instead </mat-card-subtitle>
+    <mat-card-content>
+      <mat-form-field class="comment-full-width" appearance="fill">
+        <mat-label>Leave a comment</mat-label>
+        <textarea
+          matInput
+          placeholder="Ex. It makes me feel..."
+          #message
+          maxlength="256"
+          formControlName="comment"
+        ></textarea>
+        <mat-hint align="start">Don't disclose personal info</mat-hint>
+        <mat-hint align="end">{{ message.value.length }}/256</mat-hint>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button type="submit" mat-raised-button color="primary">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+
+<mat-card *ngFor="let element of allComments" class="comment">
+  <mat-card-content>
+    {{ element.content }}
+  </mat-card-content>
+  <mat-card-footer align="end" class="comment-footer">
+    {{ element.updatedAt | date : 'yyyy-MM-dd' }} by
+    {{ element.user.userType === 'user' ? element.user.name : element.user.userType }}
+  </mat-card-footer>
+</mat-card>

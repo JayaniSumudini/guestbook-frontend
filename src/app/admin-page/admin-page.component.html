@@ -1,0 +1,41 @@
+<mat-card-title>Manage User accounts</mat-card-title>
+<mat-card *ngFor="let element of allUsers" class="users">
+  <mat-card-content class="username">
+    {{ element.name }}
+  </mat-card-content>
+  <mat-card-content>
+    {{ element.email }}
+  </mat-card-content>
+  <mat-card-footer align="end" class="user-footer">
+    {{ element.updatedAt | date : 'yyyy-MM-dd' }} by
+    {{ element.userType === 'user' ? element.name : element.userType }}
+    <button
+      type="button"
+      *ngIf="!element.isDeleted"
+      (click)="openDeleteDialog(element._id)"
+      mat-raised-button
+      color="warn"
+    >
+      Delete account
+    </button>
+    <button *ngIf="element.isDeleted" mat-raised-button disabled>Account is deleted</button>
+    <button
+      type="button"
+      *ngIf="!element.isBanned && !element.isDeleted"
+      (click)="openBanDialog(element._id)"
+      mat-raised-button
+      color="warn"
+    >
+      Ban account
+    </button>
+    <button
+      type="button"
+      *ngIf="element.isBanned && !element.isDeleted"
+      (click)="openActivateDialog(element._id)"
+      mat-raised-button
+      color="primary"
+    >
+      Reactivate account
+    </button>
+  </mat-card-footer>
+</mat-card>

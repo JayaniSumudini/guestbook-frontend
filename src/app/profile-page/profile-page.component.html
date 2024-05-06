@@ -1,0 +1,55 @@
+<div class="profile-form">
+  <form [formGroup]="profileForm" (ngSubmit)="changeUsername()">
+    <mat-card>
+      <mat-card-title>Profile</mat-card-title>
+      <mat-card-subtitle> Manage your profile settings </mat-card-subtitle>
+      <mat-card-subtitle>Basic info</mat-card-subtitle>
+      <mat-card-content>
+        <mat-label>Tell us your basic info details</mat-label>
+        <mat-form-field class="profile-full-width" appearance="fill">
+          <mat-label>Username</mat-label>
+          <input matInput #message placeholder="Ex. John" maxlength="25" minlength="5" formControlName="username" />
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button type="submit" mat-raised-button color="primary">Update</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
+
+<div class="profile-form">
+  <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+    <mat-card>
+      <mat-card-title>Change Password</mat-card-title>
+      <mat-card-subtitle> Manage your password </mat-card-subtitle>
+      <mat-card-content>
+        <mat-label>Enter your current password</mat-label>
+        <mat-form-field class="profile-full-width" appearance="fill">
+          <mat-label>current password</mat-label>
+          <input matInput #message maxlength="25" minlength="5" formControlName="oldPassword" />
+        </mat-form-field>
+        <mat-label>Enter your new password</mat-label>
+        <mat-form-field class="profile-full-width" appearance="fill">
+          <mat-label>new password</mat-label>
+          <input matInput #message maxlength="25" minlength="5" formControlName="newPassword" />
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button type="submit" mat-raised-button color="primary">Update</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
+
+<div class="profile-form">
+  <mat-card>
+    <mat-card-title>Delete My account</mat-card-title>
+    <mat-card-subtitle> Do you really want to delete your account? </mat-card-subtitle>
+    <mat-card-content> </mat-card-content>
+    <mat-card-actions align="end">
+      <!-- <button mat-raised-button color="warn">Delete</button> -->
+      <button type="button" mat-raised-button color="warn" (click)="openDeleteDialog()">Delete</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
