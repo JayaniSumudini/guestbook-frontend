@@ -6,6 +6,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Change your environments/environment.ts file with apiUrl.
 
+For this project endpoint apiUrl is : https://cc9vqgsdzd.execute-api.ap-southeast-1.amazonaws.com/dev/api
+
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
