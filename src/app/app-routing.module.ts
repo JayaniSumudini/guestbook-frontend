@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 import { ForgotPasswordPageComponent } from './forgot-password-page/forgot-password-page.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -39,6 +40,7 @@ const routes: Routes = [
     component: ForgotPasswordPageComponent,
   },
   { path: 'resetpassword', component: ResetPasswordPageComponent },
+  { path: 'admin-page', component: AdminPageComponent },
 ];
 
 @NgModule({

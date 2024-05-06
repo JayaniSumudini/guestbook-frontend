@@ -28,6 +28,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { ForgotPasswordPageComponent } from './forgot-password-page/forgot-password-page.component';
 import { ResetPasswordPageComponent } from './reset-password-page/reset-password-page.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { ResetPasswordPageComponent } from './reset-password-page/reset-password
     ProfilePageComponent,
     ForgotPasswordPageComponent,
     ResetPasswordPageComponent,
+    AdminPageComponent,
   ],
   imports: [
     BrowserModule,

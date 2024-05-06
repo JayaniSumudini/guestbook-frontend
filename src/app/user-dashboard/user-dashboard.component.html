@@ -1,4 +1,4 @@
-<form [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="comment-form">
+<form [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="comment-form" *ngIf="!isAdmin">
   <mat-card>
     <mat-card-title>Leave a Comment</mat-card-title>
     <mat-card-subtitle> You can leave a comment as a user </mat-card-subtitle>
@@ -22,6 +22,7 @@
   </mat-card>
 </form>
 
+<mat-card-title *ngIf="isAdmin">Manage Comments</mat-card-title>
 <mat-card *ngFor="let element of allComments" class="comment">
   <mat-card-content>
     {{ element.content }}
@@ -31,7 +32,7 @@
     {{ element.user.userType === 'user' ? element.user.name : element.user.userType }}
     <button
       type="button"
-      *ngIf="element.user.id === userId"
+      *ngIf="element.user.id === userId || isAdmin"
       mat-raised-button
       color="warn"
       (click)="openDeleteDialog(element._id)"
@@ -40,7 +41,7 @@
     </button>
     <button
       type="button"
-      *ngIf="element.user.id === userId"
+      *ngIf="element.user.id === userId || isAdmin"
       mat-raised-button
       color="warn"
       (click)="openEditDialog(element._id, element.content)"

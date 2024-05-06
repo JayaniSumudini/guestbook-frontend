@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { authIdentityResponse } from '../models/response';
+import { UserType } from '../models/user';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-menubar',
@@ -6,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menubar.component.scss'],
 })
 export class MenubarComponent implements OnInit {
-  constructor() {}
+  isAdmin!: boolean;
+  constructor(private authenticationService: AuthenticationService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authenticationService.getAuthIdentity().subscribe((response: authIdentityResponse) => {
+      this.isAdmin = response.user.userType === UserType.ADMIN;
+      console.log(this.isAdmin);
+    });
+  }
 }

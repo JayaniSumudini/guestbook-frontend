@@ -8,6 +8,7 @@ import { CommentService } from '../services/comment.service';
 
 import { MatDialog } from '@angular/material/dialog';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { UserType } from '../models/user';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -18,6 +19,7 @@ export class UserDashboardComponent implements OnInit {
   public commentForm!: FormGroup;
   public allComments: Comment[] = [];
   public userId!: string;
+  public isAdmin!: boolean;
 
   constructor(
     private commentService: CommentService,
@@ -35,6 +37,7 @@ export class UserDashboardComponent implements OnInit {
     this.authenticationService.getAuthIdentity().subscribe((response: authIdentityResponse) => {
       console.log(response.user._id);
       this.userId = response.user._id;
+      this.isAdmin = response.user.userType === UserType.ADMIN;
     });
   }
 
