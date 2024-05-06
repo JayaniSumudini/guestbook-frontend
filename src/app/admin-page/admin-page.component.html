@@ -1,12 +1,11 @@
 <mat-card-title>Manage User accounts</mat-card-title>
 <mat-card *ngFor="let element of allUsers" class="users">
-  <mat-card-content>
+  <mat-card-content class="username">
     {{ element.name }}
   </mat-card-content>
-  <!-- <mat-card-content>
-    {{ element.isDeleted ? 'Deleted' : element.isBanned ? 'Banned' : 'Active' }}
-    {{ element.userType === 'user' ? element.name : element.userType }}
-  </mat-card-content> -->
+  <mat-card-content>
+    {{ element.email }}
+  </mat-card-content>
   <mat-card-footer align="end" class="user-footer">
     {{ element.updatedAt | date : 'yyyy-MM-dd' }} by
     {{ element.userType === 'user' ? element.name : element.userType }}
