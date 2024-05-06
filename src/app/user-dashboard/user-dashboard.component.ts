@@ -8,7 +8,6 @@ import { CommentService } from '../services/comment.service';
 
 import { MatDialog } from '@angular/material/dialog';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
-import { UserType } from '../models/user';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -28,6 +27,7 @@ export class UserDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isAdmin = this.authenticationService.isAdmin();
     this.commentForm = new FormGroup({
       comment: new FormControl('', [Validators.required, Validators.minLength(5)]),
     });
@@ -35,9 +35,7 @@ export class UserDashboardComponent implements OnInit {
       this.allComments = response.comments;
     });
     this.authenticationService.getAuthIdentity().subscribe((response: authIdentityResponse) => {
-      console.log(response.user._id);
       this.userId = response.user._id;
-      this.isAdmin = response.user.userType === UserType.ADMIN;
     });
   }
 
@@ -73,7 +71,6 @@ export class UserDashboardComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
       if (result) {
         this.deleteComment(commentId);
       }

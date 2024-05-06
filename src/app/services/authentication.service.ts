@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { authIdentityResponse, forgotPasswordResponse, loginResponse } from '../models/response';
+import { UserType } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +14,13 @@ import { authIdentityResponse, forgotPasswordResponse, loginResponse } from '../
 export class AuthenticationService {
   private tokenKey = 'token';
   private expirationKey = 'expiration';
+  private userRoleKey = 'userrole';
   private tokenSubject: BehaviorSubject<boolean>;
+  private roleSubject: BehaviorSubject<boolean>;
 
   constructor(private http: HttpClient, private router: Router) {
     this.tokenSubject = new BehaviorSubject<boolean>(!!this.getToken());
+    this.roleSubject = new BehaviorSubject<boolean>(this.isAdmin());
   }
 
   public setTokenWithExpiration(token: string, expirationSeconds: number): void {
@@ -25,7 +29,20 @@ export class AuthenticationService {
 
     localStorage.setItem(this.tokenKey, token);
     localStorage.setItem(this.expirationKey, expiration.toISOString());
+    this.getAuthIdentity().subscribe({
+      next: (response: authIdentityResponse) => {
+        localStorage.setItem(this.userRoleKey, response.user.userType);
+        this.roleSubject.next(this.isAdmin());
+      },
+      error: (err) => {
+        return false;
+      },
+    });
     this.tokenSubject.next(true);
+  }
+
+  public isAdmin() {
+    return this.getUserRole() === UserType.ADMIN;
   }
 
   public register(username: string, email: string, password: string): void {
@@ -47,14 +64,24 @@ export class AuthenticationService {
     return localStorage.getItem(this.tokenKey);
   }
 
+  public getUserRole(): string | null {
+    return localStorage.getItem(this.userRoleKey);
+  }
+
   public isLoggedIn(): boolean {
     return !!this.getToken();
+  }
+
+  public isLoggedInAdmin(): boolean {
+    return this.isLoggedIn() && this.isAdmin();
   }
 
   private clearToken(): void {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem(this.expirationKey);
+    localStorage.removeItem(this.userRoleKey);
     this.tokenSubject.next(false);
+    this.roleSubject.next(false);
   }
 
   public logout(): void {
@@ -83,6 +110,10 @@ export class AuthenticationService {
 
   public getTokenObservable(): Observable<boolean> {
     return this.tokenSubject.asObservable();
+  }
+
+  public getRoleObservable(): Observable<boolean> {
+    return this.roleSubject.asObservable();
   }
 
   public changePassword(oldPassword: string, newPassword: string) {

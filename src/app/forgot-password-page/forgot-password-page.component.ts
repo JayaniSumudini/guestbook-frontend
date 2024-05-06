@@ -23,7 +23,6 @@ export class ForgotPasswordPageComponent implements OnInit {
   public onSubmit() {
     this.authenticationService.forgotPassword(this.forgotPasswordForm.get('email')!.value).subscribe({
       next: (response: forgotPasswordResponse) => {
-        console.log(response);
         this.router.navigate(['/resetpassword']);
       },
       error: (err: any) => {

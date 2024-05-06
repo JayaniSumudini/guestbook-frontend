@@ -20,6 +20,5 @@ export class ResetPasswordPageComponent implements OnInit {
   }
 
   public onSubmit() {
-    console.log('here');
   }
 }

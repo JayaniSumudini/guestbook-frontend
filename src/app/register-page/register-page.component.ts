@@ -22,7 +22,6 @@ export class RegisterPageComponent implements OnInit {
   }
 
   public onSubmit() {
-    console.log('here');
     this.authenticationService.register(
       this.registerForm.get('username')!.value,
       this.registerForm.get('email')!.value,

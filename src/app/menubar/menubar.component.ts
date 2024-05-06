@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { authIdentityResponse } from '../models/response';
-import { UserType } from '../models/user';
+import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
@@ -9,13 +8,17 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./menubar.component.scss'],
 })
 export class MenubarComponent implements OnInit {
-  isAdmin!: boolean;
+  isAdmin = false;
+  private roleSubscription: Subscription | undefined;
   constructor(private authenticationService: AuthenticationService) {}
 
   ngOnInit(): void {
-    this.authenticationService.getAuthIdentity().subscribe((response: authIdentityResponse) => {
-      this.isAdmin = response.user.userType === UserType.ADMIN;
-      console.log(this.isAdmin);
+    this.roleSubscription = this.authenticationService.getRoleObservable().subscribe((isAdmin) => {
+      this.isAdmin = isAdmin;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.roleSubscription?.unsubscribe();
   }
 }

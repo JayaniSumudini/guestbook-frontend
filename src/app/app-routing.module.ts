@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { ForgotPasswordPageComponent } from './forgot-password-page/forgot-password-page.component';
-import { AuthGuard } from './helpers/auth.guard';
+import { AdminAuthGuard } from './helpers/admin.auth.guard';
+import { UserAuthGuard } from './helpers/user.auth.guard';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
@@ -29,18 +30,19 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: UserDashboardComponent,
-    canActivate: [AuthGuard],
+    canActivate: [UserAuthGuard],
   },
   {
     path: 'profile',
     component: ProfilePageComponent,
+    canActivate: [UserAuthGuard],
   },
   {
     path: 'forgot-password',
     component: ForgotPasswordPageComponent,
   },
   { path: 'resetpassword', component: ResetPasswordPageComponent },
-  { path: 'admin-page', component: AdminPageComponent },
+  { path: 'admin-page', component: AdminPageComponent, canActivate: [AdminAuthGuard] },
 ];
 
 @NgModule({

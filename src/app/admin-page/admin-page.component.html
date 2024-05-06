@@ -1,1 +1,29 @@
-<p>admin-page works!</p>
+<!-- <mat-card-title *ngIf="isAdmin">Manage Comments</mat-card-title>
+<mat-card *ngFor="let element of allComments" class="comment">
+  <mat-card-content>
+    {{ element.content }}
+  </mat-card-content>
+  <mat-card-footer align="end" class="comment-footer">
+    {{ element.updatedAt | date : 'yyyy-MM-dd' }} by
+    {{ element.user.userType === 'user' ? element.user.name : element.user.userType }}
+    <button
+      type="button"
+      *ngIf="element.user.id === userId || isAdmin"
+      mat-raised-button
+      color="warn"
+      (click)="openDeleteDialog(element._id)"
+    >
+      Delete
+    </button>
+    <button
+      type="button"
+      *ngIf="element.user.id === userId || isAdmin"
+      mat-raised-button
+      color="warn"
+      (click)="openEditDialog(element._id, element.content)"
+    >
+      Edit
+    </button>
+  </mat-card-footer>
+</mat-card> -->
+<p>admin page</p>

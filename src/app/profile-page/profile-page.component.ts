@@ -25,7 +25,6 @@ export class ProfilePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.authenticationService.getAuthIdentity().subscribe((response: authIdentityResponse) => {
-      console.log(response.user);
       this.user = response.user;
     });
 
@@ -40,7 +39,6 @@ export class ProfilePageComponent implements OnInit {
   }
 
   public changeUsername() {
-    console.log(this.profileForm.get('username')!.value);
     this.userService.updateUserName(this.profileForm.get('username')!.value);
   }
 
@@ -61,7 +59,6 @@ export class ProfilePageComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
       if (result) {
         this.deleteProfile();
       }
