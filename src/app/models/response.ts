@@ -20,3 +20,7 @@ export interface authIdentityResponse {
 export interface forgotPasswordResponse {
   resetPasswordToken: string;
 }
+
+export interface getAllUsersResponse {
+  users: User[];
+}

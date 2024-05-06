@@ -55,7 +55,7 @@ export class ProfilePageComponent implements OnInit {
     let dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '250px',
       data: {
-        text: 'profile',
+        text: 'Delete profile',
       },
     });
     dialogRef.afterClosed().subscribe((result) => {

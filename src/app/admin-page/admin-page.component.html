@@ -1,29 +1,42 @@
-<!-- <mat-card-title *ngIf="isAdmin">Manage Comments</mat-card-title>
-<mat-card *ngFor="let element of allComments" class="comment">
+<mat-card-title>Manage User accounts</mat-card-title>
+<mat-card *ngFor="let element of allUsers" class="users">
   <mat-card-content>
-    {{ element.content }}
+    {{ element.name }}
   </mat-card-content>
-  <mat-card-footer align="end" class="comment-footer">
+  <!-- <mat-card-content>
+    {{ element.isDeleted ? 'Deleted' : element.isBanned ? 'Banned' : 'Active' }}
+    {{ element.userType === 'user' ? element.name : element.userType }}
+  </mat-card-content> -->
+  <mat-card-footer align="end" class="user-footer">
     {{ element.updatedAt | date : 'yyyy-MM-dd' }} by
-    {{ element.user.userType === 'user' ? element.user.name : element.user.userType }}
+    {{ element.userType === 'user' ? element.name : element.userType }}
     <button
       type="button"
-      *ngIf="element.user.id === userId || isAdmin"
+      *ngIf="!element.isDeleted"
+      (click)="openDeleteDialog(element._id)"
       mat-raised-button
       color="warn"
-      (click)="openDeleteDialog(element._id)"
     >
-      Delete
+      Delete account
+    </button>
+    <button *ngIf="element.isDeleted" mat-raised-button disabled>Account is deleted</button>
+    <button
+      type="button"
+      *ngIf="!element.isBanned && !element.isDeleted"
+      (click)="openBanDialog(element._id)"
+      mat-raised-button
+      color="warn"
+    >
+      Ban account
     </button>
     <button
       type="button"
-      *ngIf="element.user.id === userId || isAdmin"
+      *ngIf="element.isBanned && !element.isDeleted"
+      (click)="openActivateDialog(element._id)"
       mat-raised-button
-      color="warn"
-      (click)="openEditDialog(element._id, element.content)"
+      color="primary"
     >
-      Edit
+      Reactivate account
     </button>
   </mat-card-footer>
-</mat-card> -->
-<p>admin page</p>
+</mat-card>

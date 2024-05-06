@@ -7,6 +7,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { CommentService } from '../services/comment.service';
 
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 
 @Component({
@@ -18,7 +19,8 @@ export class UserDashboardComponent implements OnInit {
   public commentForm!: FormGroup;
   public allComments: Comment[] = [];
   public userId!: string;
-  public isAdmin!: boolean;
+  public isAdmin = false;
+  private roleSubscription: Subscription | undefined;
 
   constructor(
     private commentService: CommentService,
@@ -27,7 +29,9 @@ export class UserDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isAdmin = this.authenticationService.isAdmin();
+    this.roleSubscription = this.authenticationService.getRoleObservable().subscribe((isAdmin) => {
+      this.isAdmin = isAdmin;
+    });
     this.commentForm = new FormGroup({
       comment: new FormControl('', [Validators.required, Validators.minLength(5)]),
     });
@@ -37,6 +41,9 @@ export class UserDashboardComponent implements OnInit {
     this.authenticationService.getAuthIdentity().subscribe((response: authIdentityResponse) => {
       this.userId = response.user._id;
     });
+  }
+  ngOnDestroy(): void {
+    this.roleSubscription?.unsubscribe();
   }
 
   public onSubmit() {
@@ -67,7 +74,7 @@ export class UserDashboardComponent implements OnInit {
     let dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '250px',
       data: {
-        text: 'comment',
+        text: 'Delete comment',
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
